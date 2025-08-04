@@ -1,43 +1,42 @@
 # Estrategia de Testeo y Corrección
 
-A continuación se detallan los problemas encontrados en el archivo index.html y las soluciones aplicadas para cumplir con los requisitos del proyecto:
+## Problemas Encontrados y Soluciones Aplicadas
 
-1. **Uso incorrecto de addEventListener**
-   - *Problema:* Se usó "addeventListener" en vez de "addEventListener", lo que impedía que los botones funcionaran.
-   - *Solución:* Se corrigió el nombre del método a "addEventListener".
+1. **Error en el uso de `addEventListener`**
+   - **Problema:** Se utilizó `"addeventListener"` (con error de sintaxis).
+   - **Solución:** Se corrigió a `"addEventListener"` para asegurar la funcionalidad de los botones.
 
-2. **Generación de número aleatorio incorrecta**
-   - *Problema:* El número aleatorio se generaba como decimal y en un rango incorrecto (0-10 o 0-100).
-   - *Solución:* Se ajustó la generación para obtener un entero entre 1 y 100 usando `Math.floor(Math.random() * 100) + 1`.
+2. **Generación incorrecta del número aleatorio**
+   - **Problema:** Se generaban números decimales fuera del rango esperado.
+   - **Solución:** Se ajustó la lógica para generar un número entero entre 1 y 100:  
+     `Math.floor(Math.random() * 100) + 1`.
 
-3. **Validación de input insuficiente**
-   - *Problema:* Permitía letras, decimales, negativos y números mayores a 100.
-   - *Solución:* Se agregó validación para aceptar solo números enteros positivos entre 1 y 100.
+3. **Validación débil del input del usuario**
+   - **Problema:** Se permitían letras, números negativos, decimales y valores fuera de rango.
+   - **Solución:** Se implementó validación para aceptar únicamente enteros positivos entre 1 y 100.
 
-4. **Mensaje de error poco amigable**
-   - *Problema:* Se usaba `alert` del navegador para mostrar errores de input.
-   - *Solución:* Ahora el mensaje de error se muestra en la interfaz, usando el área de resultados y CSS (fondo naranja).
+4. **Manejo de errores poco amigable**
+   - **Problema:** Se utilizaban alertas (`alert`) para mostrar errores.
+   - **Solución:** Los errores ahora se muestran directamente en la interfaz con estilo (fondo naranja).
 
 5. **Comparación de tipos incorrecta**
-   - *Problema:* Se comparaba string con número, lo que podía causar fallos.
-   - *Solución:* Se convierte el input a número antes de comparar.
+   - **Problema:** Se comparaba texto (`string`) con número (`number`).
+   - **Solución:** El valor ingresado por el usuario se convierte explícitamente a número antes de la comparación.
 
-6. **Mensajes y colores no seguían los requisitos**
-   - *Problema:* Los mensajes y colores de éxito/error no coincidían con lo solicitado en el README.
-   - *Solución:* Se ajustaron los textos y colores para cada caso según los requisitos.
+6. **Mensajes y colores incorrectos**
+   - **Problema:** Los mensajes y colores no coincidían con los requerimientos del juego.
+   - **Solución:** Se ajustaron los textos y estilos para reflejar correctamente los estados de victoria, error o derrota.
 
-7. **Selector de lowOrHi incorrecto**
-   - *Problema:* Se usaba `document.querySelector('lowOrHi')` en vez de `document.querySelector('.lowOrHi')`.
-   - *Solución:* Se corrigió el selector para que apunte al elemento correcto.
+7. **Selector de elemento mal escrito**
+   - **Problema:** Se usaba `document.querySelector('lowOrHi')` (sin el punto).
+   - **Solución:** Se cambió a `document.querySelector('.lowOrHi')` para seleccionar correctamente el elemento con clase CSS.
 
 8. **Número de intentos incorrecto**
-   - *Problema:* El juego permitía solo 5 intentos en vez de los 10 requeridos.
-   - *Solución:* Se ajustó la variable a 10 intentos.
+   - **Problema:** El juego finalizaba a los 5 intentos.
+   - **Solución:** Se modificó la lógica para permitir 10 intentos, como indica el proyecto.
 
 9. **Lógica de victoria/derrota invertida**
-   - *Problema:* Los mensajes de victoria y derrota estaban invertidos y no se mostraban correctamente.
-   - *Solución:* Se corrigió la lógica para mostrar el mensaje adecuado según el resultado del juego.
+   - **Problema:** Los mensajes de éxito y fracaso no se mostraban correctamente.
+   - **Solución:** Se corrigió la condición para mostrar el mensaje correcto según el resultado del jugador.
 
----
-
-Cada uno de estos puntos fue verificado y corregido para asegurar el funcionamiento correcto del juego y el cumplimiento de los requisitos del cliente.
+Todas las modificaciones fueron probadas para verificar que el juego responde correctamente en cada escenario. Se validó también que la interfaz y comportamiento general coincidan con lo solicitado en el proyecto original.
