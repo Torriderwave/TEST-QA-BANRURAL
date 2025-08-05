@@ -15,10 +15,50 @@
         min-width: 480px;
         margin: 0 auto;
       }
-      .lastResult {
-        color: white;
-        padding: 3px;
-      }
+    .resultParas {
+      margin-top: 20px;
+    }
+    .guesses {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .lastResult {
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1.2em;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lastResult.red {
+      background: #e53935;
+      color: white;
+    }
+    .lastResult.green {
+      background: #43a047;
+      color: white;
+    }
+    .lastResult.orange {
+      background: orange;
+      color: white;
+    }
+    .lastResult.white {
+      background: #fff;
+      color: black;
+    }
+    .lowOrHi {
+      color: white;
+      background: black;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      display: none;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-size: 1em;
+      transition: background 0.2s, color 0.2s;
+    }
     </style>
   </head>
 
@@ -58,8 +98,9 @@ function checkGuess() {
   // Validación de número entero positivo entre 1 y 100
   if (!/^\d+$/.test(userGuess) || Number(userGuess) < 1 || Number(userGuess) > 100) {
     lastResult.textContent = 'Por favor ingresa un número entero válido entre 1 y 100.';
-    lastResult.style.backgroundColor = 'orange';
+    lastResult.className = 'lastResult orange';
     lowOrHi.textContent = '';
+    lowOrHi.style.display = 'none';
     guessField.value = '';
     guessField.focus();
     return;
@@ -72,26 +113,27 @@ function checkGuess() {
 
   if (userGuess === randomNumber) {
     lastResult.textContent = 'Felicitaciones! adivinaste el número!';
-    lastResult.style.backgroundColor = 'green';
+    lastResult.className = 'lastResult green';
     lowOrHi.textContent = '';
+    lowOrHi.style.display = 'none';
     setGameOver();
   } else if (guessCount === ATTEMPTS) {
     lastResult.textContent = '!!!Pérdistes!!!';
-    lastResult.style.backgroundColor = 'red';
+    lastResult.className = 'lastResult red';
     lowOrHi.textContent = '';
+    lowOrHi.style.display = 'none';
     setGameOver();
   } else {
-    lastResult.textContent = 'Incorrecto!';
-    lastResult.style.backgroundColor = 'white';
+    lastResult.textContent = '';
+    lastResult.className = 'lastResult white';
     if (userGuess < randomNumber) {
       lowOrHi.textContent = 'Incorrecto! El número es mayor!';
-      lowOrHi.style.color = 'black';
+      lowOrHi.style.display = 'inline-block';
     } else if (userGuess > randomNumber) {
       lowOrHi.textContent = 'Incorrecto! El número es menor!';
-      lowOrHi.style.color = 'black';
+      lowOrHi.style.display = 'inline-block';
     }
   }
-
   guessCount++;
   guessField.value = '';
   guessField.focus();
@@ -119,8 +161,9 @@ function resetGame() {
   guessSubmit.disabled = false;
   guessField.value = '';
   guessField.focus();
-  lastResult.style.backgroundColor = 'white';
+  lastResult.className = 'lastResult white';
   lowOrHi.textContent = '';
+  lowOrHi.style.display = 'none';
   randomNumber = Math.floor(Math.random() * 100) + 1;
 }
 </script>
